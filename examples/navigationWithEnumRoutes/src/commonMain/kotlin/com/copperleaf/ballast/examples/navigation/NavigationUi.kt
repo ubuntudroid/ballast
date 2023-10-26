@@ -27,7 +27,7 @@ object NavigationUi {
     @Composable
     fun Content() {
         val applicationScope = rememberCoroutineScope()
-        val router: Router<AppScreen> = remember(applicationScope) { RouterViewModel(applicationScope) }
+        val router: Router<AppScreen> = remember(applicationScope) { createRouter(applicationScope) }
 
         val routerState: Backstack<AppScreen> by router.observeStates().collectAsState()
 
@@ -47,7 +47,8 @@ object NavigationUi {
                                 goToPost = { postId ->
                                     router.trySend(
                                         RouterContract.Inputs.GoToDestination(
-                                            AppScreen.PostDetails.directions().pathParameter("postId", postId.toString())
+                                            AppScreen.PostDetails.directions()
+                                                .pathParameter("postId", postId.toString())
                                                 .build()
                                         )
                                     )
@@ -62,7 +63,8 @@ object NavigationUi {
                                 changeSort = { sortDirection ->
                                     router.trySend(
                                         RouterContract.Inputs.ReplaceTopDestination(
-                                            AppScreen.PostList.directions().queryParameter("sort", sortDirection).build()
+                                            AppScreen.PostList.directions().queryParameter("sort", sortDirection)
+                                                .build()
                                         )
                                     )
                                 },
@@ -74,7 +76,8 @@ object NavigationUi {
                                 goToPost = { postId ->
                                     router.trySend(
                                         RouterContract.Inputs.GoToDestination(
-                                            AppScreen.PostDetails.directions().pathParameter("postId", postId.toString())
+                                            AppScreen.PostDetails.directions()
+                                                .pathParameter("postId", postId.toString())
                                                 .build()
                                         )
                                     )

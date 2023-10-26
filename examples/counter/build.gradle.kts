@@ -27,6 +27,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":ballast-core"))
+                implementation(project(":ballast-debugger-client"))
             }
         }
 
@@ -39,6 +40,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(libs.kotlinx.coroutines.swing)
+                implementation(libs.ktor.client.cio)
             }
         }
 
@@ -46,11 +48,19 @@ kotlin {
             dependencies {
                 implementation(libs.androidx.material)
                 implementation(libs.androidx.activityCompose)
+                implementation(libs.ktor.client.cio)
+            }
+        }
+
+        val iosMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.darwin)
             }
         }
 
         val jsMain by getting {
             dependencies {
+                implementation(libs.ktor.client.js)
             }
         }
     }
